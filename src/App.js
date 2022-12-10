@@ -29,16 +29,16 @@ function App() {
               }}
             >
               <div>
-                <Link to="/customers">Customers</Link>
+                <Link style={{color: "white"}} to="/customers">Customers</Link>
               </div>
               <div>
-                <Link to="/trainings">Trainings</Link>
+                <Link style={{color: "white"}} to="/trainings">Trainings</Link>
               </div>
             </Typography>
           </Toolbar>
         </AppBar>
 
-        <Routes>
+        <Routes basename="/personaltrainerapp">
           <Route path="/" element={<CustomerList />} />
           <Route path="/customers" element={<CustomerList />} />
           <Route path="/trainings" element={<TrainingList />} />
