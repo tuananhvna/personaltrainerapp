@@ -9,7 +9,6 @@ import EditCustomer from './EditCustomer';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import Csv from './Csv'
 
 export default function CustomerList() {
     //states

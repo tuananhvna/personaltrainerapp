@@ -10,7 +10,6 @@ import EditTraining from './EditTraining'
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import TrainingCalendar from './TrainingCalendar';
 
 export default function TrainingList() {
     //states
@@ -106,6 +105,7 @@ export default function TrainingList() {
     return (
         <div className="ag-theme-material"
         style={{height: '700px'}} >
+
             <AddTraining saveTraining={saveTraining} />
 
             <Snackbar
@@ -124,8 +124,6 @@ export default function TrainingList() {
                 columnDefs={columns}
                 rowData={trainings}>
             </AgGridReact>
-
-            <TrainingCalendar trainings={trainings} />
 
         </div>
     )

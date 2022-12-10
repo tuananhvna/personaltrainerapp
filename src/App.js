@@ -1,7 +1,6 @@
 import './App.css';
 import CustomerList from './components/CustomerList';
 import TrainingList from './components/TrainingList';
-import TrainingCalendar from './components/TrainingCalendar';
 import {  BrowserRouter,  Routes,  Route,  Link} from "react-router-dom";
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
