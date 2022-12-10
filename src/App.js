@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App">
 
-      <BrowserRouter basename="/">
+      <BrowserRouter basename="/personaltrainerapp">
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
