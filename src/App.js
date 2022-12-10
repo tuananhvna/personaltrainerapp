@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App">
 
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <AppBar position="static">
           <Toolbar>
             <Typography
@@ -38,7 +38,7 @@ function App() {
           </Toolbar>
         </AppBar>
 
-        <Routes basename="/personaltrainerapp">
+        <Routes>
           <Route path="/" element={<CustomerList />} />
           <Route path="/customers" element={<CustomerList />} />
           <Route path="/trainings" element={<TrainingList />} />
