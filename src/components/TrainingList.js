@@ -5,8 +5,6 @@ import'ag-grid-community/dist/styles/ag-theme-material.css';
 import dayjs from 'dayjs';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
-import AddTraining from './AddTraining';
-import EditTraining from './EditTraining'
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
@@ -21,9 +19,9 @@ export default function TrainingList() {
     useEffect(() => fetchData(), []);
 
     const fetchData = () => {
-        fetch('https://customerrest.herokuapp.com/api/trainings')
+        fetch('https://customerrest.herokuapp.com/gettrainings')
         .then(response => response.json())
-        .then(data => setTrainings(data.content))
+        .then(data => setTrainings(data))
         .catch(err => console.error(err))
     }
 
@@ -34,18 +32,18 @@ export default function TrainingList() {
         }, sortable: true, filter: true, floatingFilter: true},
         {headerName: 'Duration in minutes', field: 'duration', sortable: true, filter: true, floatingFilter: true},
         {headerName: 'Activity', field: 'activity', sortable: true, filter: true, floatingFilter: true},
+        {headerName: 'Customer', field: 'customer', cellRenderer: (params) => {
+            return params.data.customer.firstname + ' ' +params.data.customer.lastname;
+        }, sortable: true, filter: true, floatingFilter: true},
         {headerName: '', cellRenderer: (params) => {
             return <Button variant="outlined" startIcon={<DeleteIcon />} onClick={deleteTraining}>Delete</Button>;
-        }},
-        {headerName: '', cellRenderer: (params) => {
-            return <EditTraining updateTraining={updateTraining} training={params.data} />;
         }}
     ]
     
     //delete training
     const deleteTraining = event => {
         if(window.confirm("Are you sure that you want to delete this training?")) {
-            fetch(gridRef.current.getSelectedNodes()[0].data.links[0].href, {method: 'DELETE'})
+            fetch('https://customerrest.herokuapp.com/api/trainings/' + gridRef.current.getSelectedNodes()[0].data.id, {method: 'DELETE'})
             .then(res => fetchData())
             .catch(err => console.error(err))
             setOpenSnackBar(true);
@@ -54,25 +52,20 @@ export default function TrainingList() {
 
     //add training
     const saveTraining = (training) => {
+        console.log(training)
+        console.log(dayjs(training.date).toISOString())
         fetch('https://customerrest.herokuapp.com/api/trainings', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(training)
-        })
-        .then(res => fetchData())
-        .catch(err => console.error(err))
-    }
-
-    //update training
-    const updateTraining = (training, link) => {
-        fetch(link, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(training)
+            // body: JSON.stringify(training)
+            body: {
+                date: dayjs(training.date).toISOString(),
+                activity: training.activity,
+                duration: training.duration,
+                customer: 'https://localhost:8080/api/customers/' + training.customer_id
+            }
         })
         .then(res => fetchData())
         .catch(err => console.error(err))
@@ -105,8 +98,6 @@ export default function TrainingList() {
     return (
         <div className="ag-theme-material"
         style={{height: '700px'}} >
-
-            <AddTraining saveTraining={saveTraining} />
 
             <Snackbar
                 open={openSnackBar}

@@ -11,23 +11,10 @@ function App() {
   return (
     <div className="App">
 
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <BrowserRouter>
         <AppBar position="static">
           <Toolbar>
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href=""
-              sx={{
-                flexGrow: 1,
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               <div>
                 <Link style={{color: "white"}} to="/customers">Customers</Link>
               </div>

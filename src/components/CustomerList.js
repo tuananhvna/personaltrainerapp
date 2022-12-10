@@ -9,6 +9,8 @@ import EditCustomer from './EditCustomer';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import dayjs from 'dayjs';
+import AddTraining from './AddTraining';
 
 export default function CustomerList() {
     //states
@@ -40,6 +42,9 @@ export default function CustomerList() {
         }},
         {headerName: '', cellRenderer: (params) => {
             return <EditCustomer updateCustomer={updateCustomer} customer={params.data} />;
+        }},
+        {headerName: '', cellRenderer: (params) => {
+            return <AddTraining saveTraining={saveTraining} updateCustomer={updateCustomer} customer={params.data} />;
         }}
     ]
 
@@ -51,6 +56,21 @@ export default function CustomerList() {
             .catch(err => console.error(err))
             setOpenSnackBar(true);
         }
+    }
+
+    //add training to a customer
+    const saveTraining = (training) => {
+        console.log(training)
+        console.log(dayjs(training.date).toISOString())
+        fetch('https://customerrest.herokuapp.com/api/trainings', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(training)
+        })
+        .then(res => fetchData())
+        .catch(err => console.error(err))
     }
 
     //add customer

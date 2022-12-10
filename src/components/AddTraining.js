@@ -12,16 +12,18 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import AddIcon from '@mui/icons-material/Add';
 
 export default function AddTraining(props) {
     //states
     const [training, setTraining] = useState({
-        date: '', duration: '', activity: ''
+        date: '', duration: '', activity: '', customer: ''
     })
     const [open, setOpen] = useState(false);
     const [openSnackBar, setOpenSnackBar] = useState(false);
 
     const handleClickOpen = () => {
+        setTraining({date: '', duration: '', activity: '', customer: props.customer.links[0].href})
         setOpen(true);
     };
 
@@ -39,6 +41,7 @@ export default function AddTraining(props) {
     };
 
     const addTraining = () => {
+        setTraining({date: '', duration: '', activity: '', customer: props.customer.links[0].href})
         props.saveTraining(training);
         handleClose();
         setOpenSnackBar(true);
@@ -68,7 +71,7 @@ export default function AddTraining(props) {
     return (
         <div>
         
-        <Button style={{margin: 10}} variant="outlined" onClick={handleClickOpen}>
+        <Button variant="outlined" startIcon={<AddIcon />} onClick={handleClickOpen}>
             Add training
         </Button>
         <Snackbar
@@ -113,6 +116,17 @@ export default function AddTraining(props) {
                                         name="activity"
                                         value={training.activity}
                                         label="Activity"
+                                        onChange={event => handleInputChange(event)}
+                                        fullWidth
+                                        variant="standard"
+                                    />
+                                </DialogContent>
+                                <DialogContent>
+                                    <TextField
+                                        margin="dense"
+                                        name="customer"
+                                        value={props.customer.links[0].href}
+                                        label="Customer"
                                         onChange={event => handleInputChange(event)}
                                         fullWidth
                                         variant="standard"
