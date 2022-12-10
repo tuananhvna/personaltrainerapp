@@ -1,6 +1,7 @@
 {
   "name": "personaltrainerapp",
   "version": "0.1.0",
+  "hompage": "https://tuananhvna.github.io/personaltrainerapp",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -49,10 +50,5 @@
   },
   "devDependencies": {
     "gh-pages": "^4.0.0"
-  },
-  "hompage": {
-    "name": "reactdeploy",
-    "version": "0.1.0",
-    "homepage": "https://tuananhvna.github.io/personaltrainerapp"
   }
 }
