@@ -11,12 +11,12 @@ function App() {
   return (
     <div className="App">
 
-      <BrowserRouter>
+      <BrowserRouter basename="/">
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              <Link to="/customers">Customers</Link>{' '}
-              <Link to="/trainings">Trainings</Link>{' '}
+              <Link to="/customers">Customers</Link>
+              <Link to="/trainings">Trainings</Link>
             </Typography>
           </Toolbar>
         </AppBar>
