@@ -11,17 +11,34 @@ function App() {
   return (
     <div className="App">
 
-      <BrowserRouter basename="/personaltrainerapp">
+      <BrowserRouter>
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              <Link to="/customers">Customers</Link>
-              <Link to="/trainings">Trainings</Link>
+            <Typography
+              variant="h5"
+              noWrap
+              component="a"
+              href=""
+              sx={{
+                flexGrow: 1,
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              <div>
+                <Link to="/customers">Customers</Link>
+              </div>
+              <div>
+                <Link to="/trainings">Trainings</Link>
+              </div>
             </Typography>
           </Toolbar>
         </AppBar>
 
-        <Routes>
+        <Routes basename="/personaltrainerapp">
           <Route path="/" element={<CustomerList />} />
           <Route path="/customers" element={<CustomerList />} />
           <Route path="/trainings" element={<TrainingList />} />
