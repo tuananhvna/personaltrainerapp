@@ -2,7 +2,7 @@ import React, {useEffect, useState, useRef} from 'react';
 import { AgGridReact } from'ag-grid-react';
 import'ag-grid-community/dist/styles/ag-grid.css';
 import'ag-grid-community/dist/styles/ag-theme-material.css';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddTraining from './AddTraining';
@@ -10,6 +10,7 @@ import EditTraining from './EditTraining'
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import TrainingCalendar from './TrainingCalendar';
 
 export default function TrainingList() {
     //states
@@ -123,7 +124,9 @@ export default function TrainingList() {
                 columnDefs={columns}
                 rowData={trainings}>
             </AgGridReact>
-    
+
+            <TrainingCalendar trainings={trainings} />
+
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState, useRef, useCallback} from 'react';
 import { AgGridReact } from'ag-grid-react';
 import'ag-grid-community/dist/styles/ag-grid.css';
 import'ag-grid-community/dist/styles/ag-theme-material.css';
@@ -9,6 +9,7 @@ import EditCustomer from './EditCustomer';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import Csv from './Csv'
 
 export default function CustomerList() {
     //states
@@ -103,6 +104,12 @@ export default function CustomerList() {
         </React.Fragment>
       );
 
+    //export to csv
+    const onBtnExport = useCallback(() => {
+        gridRef.current.exportDataAsCsv();
+        console.log(gridRef.current)
+    }, []);
+
     return (
         <div className="ag-theme-material"
         style={{height: '700px'}} >
@@ -117,10 +124,13 @@ export default function CustomerList() {
                 action={action}
             />
 
+            <Button onClick={onBtnExport}>Download CSV export file</Button>
+            
             <AgGridReact
                 animateRows={true}
                 ref={gridRef}
                 onGridReady={ params => gridRef.current = params.api }
+                suppressExcelExport={true}
                 rowSelection="single"
                 columnDefs={columns}
                 rowData={customers}>
