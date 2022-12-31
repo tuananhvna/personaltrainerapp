@@ -1,4 +1,4 @@
-This is a simple personal trainer front-end app using React and AG-Grid. User can see the data of trainings and customers; add, edit, delete customers/trainings; export data to csv file.
+This is a simple personal trainer front-end app using React, material UI and AG-Grid. User can see the data of trainings and customers; add, edit, delete customers/trainings; export data to csv file.
 
 # Getting Started with Create React App
 
